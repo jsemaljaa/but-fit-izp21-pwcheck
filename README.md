@@ -48,8 +48,8 @@ Different characters: NCHARS
 Minimum length: MIN
 Average length: AVG
 ```
-where
 
+| Argument | Description |
 | --- | --- |
 | `NCHARS` | The number of different characters that appear across all passwords. |
 | `MIN` | Length of the shortest password (or passwords). |
@@ -112,7 +112,7 @@ Different characters: NCHARS
 Minimum length: MIN
 Average length: AVG
 ```
-kde
+| Proměnná | Popis |
 | --- | --- |
 | `NCHARS` | Počet různých znaků vyskytujících se napříč všemi hesly. |
 | `MIN` | délka nejkratšího hesla (resp. hesel) |
