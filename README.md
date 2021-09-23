@@ -18,6 +18,7 @@ Cílem projektu je vytvořit program, který na vstupu dostane sadu hesel a pro 
 `./pwcheck LEVEL PARAM [--stats]`
 
 | Příkaz | Popis |
+| --- | --- |
 | `LEVEL` | Celé číslo v intervalu [1, 4], které určuje požadovanou úroveň bezpečnosti (viz níže) |
 | `PARAM` | Kladné celé číslo, které určuje dodatečný parametr pravidel (viz níže) |
 | `--stats` | Pokud je zadané, určuje, zda se na konci programu mají vypsat souhrnné statistiky analyzovaných hesel |
@@ -49,6 +50,7 @@ Minimalni delka: MIN
 Prumerna delka: AVG
 ```
 kde
+| --- | --- |
 | `NCHARS` | Počet různých znaků vyskytujících se napříč všemi hesly. |
 | `MIN` | délka nejkratšího hesla (resp. hesel) |
 | `AVG` | průměrná délka hesla (aritmetický průměr) zaokrouhlená na 1 desetiné místo. |
