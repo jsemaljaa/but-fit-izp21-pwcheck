@@ -9,6 +9,8 @@
                                         -----------------------------------
                                                                          */
 
+// #TODO: доделать функцию concatStr, разобраться с нулевым чаром (71 строка вызывает segfault)
+
 #define  _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
@@ -46,12 +48,51 @@ bool compareStr(char *str, char *arg){
     return true;
 }
 
+int lengthStr(char *str){
+    int i;
+    for (i = 0; str[i] != '\0'; i++);
+    return i;
+}
+
+char *copyStr(char *src, char *dst){
+    int i;
+    for (i = 0; src[i] != '\0'; i++)
+    {
+        dst[i] = src[i];
+    }
+    dst[i] = '\0';
+    return dst;    
+}
+
+char *concatStr(char *dst, char *src){
+    printf("this is string1: %s\n", dst);
+    printf("this is string2 %s\n", src);
+    int i;
+    //for (i = 0; dst[i] != '\0'; i++);
+    i = 10;
+    puts("HELLOOOOOOO");
+    for (int j = 0; src[j] != '\0'; j++, i++)
+    {
+        if (src[j] == '\n')
+        {
+            src[j] = ' ';
+            j++;
+            dst[i] = src[j];
+        } else
+        {
+            dst[i] = src[j];
+        }
+    }
+
+    return dst;
+}
+
 bool callHelp(int argc, char **argv){
     return ((argc == 2) && compareStr(argv[1], help));
 }
 
 bool statsEn(char **argv){
-    if (compareStr(stats, argv[3]) == 1)
+    if (compareStr(stats, argv[3]))
     {
         return true;
     } else 
@@ -74,31 +115,54 @@ bool checkInt(char *arg){
 bool checkArgs(int argc, char **argv){
     if (argc > 4 || argc < 3) 
     {
-        printf("Something went wrong with arguments! Type %s --help for help\n", argv[0]);
+        printf("Something went wrong with arguments! Try %s --help for help\n", argv[0]);
         return false;        
-    } else if (argc == 4 && checkInt(argv[1]) && checkInt(argv[2]) && statsEn(argv))
-    {
-        return true;        
-    } else if (argc == 3 && checkInt(argv[1]) && checkInt(argv[2]))
-    {
+    } 
+    else if (argc == 4 && checkInt(argv[1]) && checkInt(argv[2]) && statsEn(argv))
+        return true; 
+    else if (argc == 3 && checkInt(argv[1]) && checkInt(argv[2]))
         return true;
+    else 
+    { 
+        printf("Something went wrong with arguments! Try %s --help for help\n", argv[0]); 
+        return false;
     }
     return true;
 }
 
-
-
 int main(int argc, char **argv){
-
 
     if (callHelp(argc, argv))
     {
         showHelp(argv[0]);
     } else if (checkArgs(argc, argv))
     {   
-        return 0;
+        printf("Everything is working fine yet\n");
+    }
+    
+    //char p1[10] = "hello";
+    char *passwords[MAX_PWD_LEN*1000];
+
+    //printf("p1 now is %s", p1);
+    printf("passwords now is %s\n", *passwords);
+    
+    //copyStr(p1, *passwords);
+
+
+    char str[MAX_PWD_LEN];
+
+    while (fgets(str, MAX_PWD_LEN, stdin))
+    {
+        concatStr(*passwords, str);
+        printf("%s", str);
     }
 
-           
+    // /* remove newline, if present */
+    // i = lengthStr(str)-1;
+    // if( str[ i ] == '\n')
+    // str[i] = '\0';
+
+    //printf("This is your string: %s\n", str);
+
     return 0;
 }
