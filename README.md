@@ -49,6 +49,7 @@ Minimum length: MIN
 Average length: AVG
 ```
 where
+
 | --- | --- |
 | `NCHARS` | The number of different characters that appear across all passwords. |
 | `MIN` | Length of the shortest password (or passwords). |
