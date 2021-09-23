@@ -20,7 +20,7 @@ The goal of the project is to create a program that receives a set of passwords 
 | `LEVEL` | An integer in the interval [1, 4] that specifies the required security level (see below) |
 | `PARAM` | A positive integer that specifies an additional rule parameter (see below) |
 | `--stats` | If specified, determines whether summary statistics of the analyzed passwords should be displayed at the end of the program. |
-| `-help` | Shows the correct ways to work with the program. |
+| `--help` | Shows the correct ways to work with the program. |
 
 ## Security levels (controlled rules)
 
