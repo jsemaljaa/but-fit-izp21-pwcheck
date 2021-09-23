@@ -60,31 +60,30 @@ bool statsEn(char **argv){
 }
 
 bool checkInt(char *arg){
-    printf("Checking argument %s.....\n", arg);
     if (*arg >= '0' && *arg <= '9')
     {
         printf("Argument %s is fine\n", arg);
         return true;
     } else 
     {
-        printf("Argument %s is wrong\n", arg);
+        printf("Argument %s has to be a positive integer\n", arg);
         return false;
     }
 }
 
-int checkArgs(int argc, char **argv){
-    int argsOk;
-    if ((argc > 4) || (argc == 4 && statsEn(argv)))
+bool checkArgs(int argc, char **argv){
+    if (argc > 4 || argc < 3) 
     {
-        puts("wrong arguments");
-        return ARGS_NUM_ERROR;        
+        printf("Something went wrong with arguments! Type %s --help for help\n", argv[0]);
+        return false;        
+    } else if (argc == 4 && checkInt(argv[1]) && checkInt(argv[2]) && statsEn(argv))
+    {
+        return true;        
     } else if (argc == 3 && checkInt(argv[1]) && checkInt(argv[2]))
     {
-        argsOk = 1;
-        puts("everything is fine");
+        return true;
     }
-    
-    return argsOk;
+    return true;
 }
 
 
@@ -96,7 +95,7 @@ int main(int argc, char **argv){
     if (callHelp(argc, argv))
     {
         showHelp(argv[0]);
-    } else if (checkArgs(argc, argv) == 1)
+    } else if (checkArgs(argc, argv))
     {
         return 0;
     }
