@@ -9,6 +9,7 @@
                                         -----------------------------------
                                                                          */
 
+#define  _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -62,11 +63,10 @@ bool statsEn(char **argv){
 bool checkInt(char *arg){
     if (*arg >= '0' && *arg <= '9')
     {
-        printf("Argument %s is fine\n", arg);
         return true;
     } else 
     {
-        printf("Argument %s has to be a positive integer\n", arg);
+        printf("Argument %s has to be a positive integer!\n", arg);
         return false;
     }
 }
@@ -90,16 +90,15 @@ bool checkArgs(int argc, char **argv){
 
 int main(int argc, char **argv){
 
-    printf("number of arguments: %d\n", argc);
 
     if (callHelp(argc, argv))
     {
         showHelp(argv[0]);
     } else if (checkArgs(argc, argv))
-    {
+    {   
         return 0;
     }
-       
-    return 0;
 
+           
+    return 0;
 }
