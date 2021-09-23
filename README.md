@@ -13,13 +13,14 @@ The goal of the project is to create a program that receives a set of passwords 
 
 ## Execution syntax
 
-`./pwcheck LEVEL PARAM [--stats]`
+`./pwcheck [--help] LEVEL PARAM [--stats]`
 
 | Command | Description |
 | --- | --- |
 | `LEVEL` | An integer in the interval [1, 4] that specifies the required security level (see below) |
 | `PARAM` | A positive integer that specifies an additional rule parameter (see below) |
-| `--stats` | If specified, determines whether summary statistics of the analyzed passwords should be displayed at the end of the program |
+| `--stats` | If specified, determines whether summary statistics of the analyzed passwords should be displayed at the end of the program. |
+| `-help` | Shows the correct ways to work with the program. |
 
 ## Security levels (controlled rules)
 
@@ -82,9 +83,10 @@ Cílem projektu je vytvořit program, který na vstupu dostane sadu hesel a pro 
 
 | Příkaz | Popis |
 | --- | --- |
-| `LEVEL` | Celé číslo v intervalu [1, 4], které určuje požadovanou úroveň bezpečnosti (viz níže) |
-| `PARAM` | Kladné celé číslo, které určuje dodatečný parametr pravidel (viz níže) |
-| `--stats` | Pokud je zadané, určuje, zda se na konci programu mají vypsat souhrnné statistiky analyzovaných hesel |
+| `LEVEL` | Celé číslo v intervalu [1, 4], které určuje požadovanou úroveň bezpečnosti (viz níže). |
+| `PARAM` | Kladné celé číslo, které určuje dodatečný parametr pravidel (viz níže). |
+| `--stats` | Pokud je zadané, určuje, zda se na konci programu mají vypsat souhrnné statistiky analyzovaných hesel. |
+| `--help` | Ukazuje správný způsob práce s programem. |
 
 ## Úrovně bezpečnosti (kontrolovaná pravidla)
 
@@ -115,7 +117,7 @@ Average length: AVG
 | Proměnná | Popis |
 | --- | --- |
 | `NCHARS` | Počet různých znaků vyskytujících se napříč všemi hesly. |
-| `MIN` | délka nejkratšího hesla (resp. hesel) |
+| `MIN` | délka nejkratšího hesla (resp. hesel). |
 | `AVG` | průměrná délka hesla (aritmetický průměr) zaokrouhlená na 1 desetiné místo. |
 
 ## Implementační detaily
