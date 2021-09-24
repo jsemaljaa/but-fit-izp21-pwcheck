@@ -11,7 +11,7 @@
 
 // #TODO: доделать функцию concatStr, разобраться с нулевым чаром (71 строка вызывает segfault)
 
-#define  _GNU_SOURCE
+// #define  _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -22,7 +22,6 @@
 
 enum ERRORS {
     PWD_LEN_ERROR = 1,
-    ARGS_NUM_ERROR = 1,
     ARG_ERROR = 1
 };
 
@@ -50,24 +49,23 @@ bool compareStr(char *str, char *arg){
 
 int lengthStr(char str[MAX_PWD_LEN]){
     int i = 0;
-    for (i = 0; str[i] != '\0' && str[i] != '\n'; i++);
+    for (i = 0; str[i] != '\0' && str[i] != '\n'; ++i);
+    for (int n = 0; str[n] != '\0'; n++)
+    {
+        if (str[n] == '\n')
+        {
+            i--;
+        }
+    }
     return i;
 }
 
-bool callHelp(int argc, char **argv){
+bool helpEn(int argc, char **argv){
     return ((argc == 2) && compareStr(argv[1], help));
 }
 
 bool statsEn(char **argv){
-    
     return (compareStr(stats, argv[3])) ? true : false;
-    // if (compareStr(stats, argv[3]))
-    // {
-    //     return true;
-    // } else 
-    // { 
-    //     return false; 
-    // }
 }
 
 bool checkInt(char *arg){
@@ -82,28 +80,17 @@ bool checkInt(char *arg){
 }
 
 bool checkArgs(int argc, char **argv){
-    if (argc > 4 || argc < 3) 
-    {
-        printf("Something went wrong with arguments! Try %s --help for help\n", argv[0]);
-        return false;        
-    } 
-    else if (argc == 4 && checkInt(argv[1]) && checkInt(argv[2]) && statsEn(argv))
-        return true; 
-    else if (argc == 3 && checkInt(argv[1]) && checkInt(argv[2]))
+    if (argc == 4 && checkInt(argv[1]) && checkInt(argv[2]) && statsEn(argv)) 
         return true;
-    else 
-    { 
-        printf("Something went wrong with arguments! Try %s --help for help\n", argv[0]); 
-        return false;
-    }
-    return true;
+    else if (argc == 3 && checkInt(argv[1]) && checkInt(argv[2])) 
+        return true;
+    
+    return false;
 }
 
 bool areLetters(char str[MAX_PWD_LEN]){
-    
     int flagB, flagS;
-
-    for (int i = 0; i < lengthStr(str); i++)
+    for (int i = 0; i < lengthStr(str); ++i)
     {
         if (str[i] >= 65 && str[i] <= 90 )
         {
@@ -118,35 +105,55 @@ bool areLetters(char str[MAX_PWD_LEN]){
     return (flagB == 1 && flagS == 1) ? true : false;
 }
 
-int minLength(int seen, int curr){
-    
-    //printf("length of %s at line 123 is %d\n", str, n);
-    //printf("current seen at line 124 is %d\n", seen);
-
-    return (curr <= seen) ? curr : seen;
+int minLength(char str[MAX_PWD_LEN], int seen){
+    int currentMin = lengthStr(str);
+    return (currentMin <= seen) ? currentMin : seen;
 }
+
+// int charsCount(char str[MAX_PWD_LEN], char seen[]){
+//     for (int i = 0; i < lengthStr(str); ++i)
+//     {
+
+//     }
+    
+// }
+
+// void showStats(int chars, int min, int avg){
+
+// }
+
+// void inputProcessing(){
+
+// }
 
 int main(int argc, char **argv){
 
-    if (callHelp(argc, argv))
+    char password[MAX_PWD_LEN];
+    int min = lengthStr(fgets(password, MAX_PWD_LEN, stdin));
+    float count = 1;
+    float avg;
+    float sum = min;
+    if (helpEn(argc, argv))
     {
         showHelp(argv[0]);
+        return 0;
     } else if (checkArgs(argc, argv))
     {   
-        printf("Everything is working fine yet\n");
-    }  
+        while(fgets(password, MAX_PWD_LEN, stdin))
+        {
+            ++count;
+            min = minLength(password, min);
+            sum += lengthStr(password);
+        }
 
-    char password[MAX_PWD_LEN];
-    int seen;
-    int curr = lengthStr(fgets(password, MAX_PWD_LEN, stdin));
-    
-    while(fgets(password, MAX_PWD_LEN, stdin))
+        avg = sum/count;
+        printf("Minimum length: %d\n", min);
+        printf("Average length: %.1f\n", avg);
+    } else if (!checkArgs(argc, argv))
     {
-        //int min = minLength();
-        seen = lengthStr(password);
-        curr = minLength(seen, curr);
-        printf("current password is %s\n", password);
-        printf("minimum is %d\n", curr);
+        printf("Something went wrong with arguments! Try %s --help for help\n", argv[0]); 
+        return ARG_ERROR;
     }
+    
     return 0;
 }
