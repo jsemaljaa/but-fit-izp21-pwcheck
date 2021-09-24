@@ -48,9 +48,9 @@ bool compareStr(char *str, char *arg){
     return true;
 }
 
-int lengthStr(char *str){
-    int i;
-    for (i = 0; str[i] != '\0'; i++);
+int lengthStr(char str[MAX_PWD_LEN]){
+    int i = 0;
+    for (i = 0; str[i] != '\0' && str[i] != '\n'; i++);
     return i;
 }
 
@@ -62,29 +62,6 @@ char *copyStr(char *src, char *dst){
     }
     dst[i] = '\0';
     return dst;    
-}
-
-char *concatStr(char *dst, char *src){
-    printf("this is string1: %s\n", dst);
-    printf("this is string2 %s\n", src);
-    int i;
-    //for (i = 0; dst[i] != '\0'; i++);
-    i = 10;
-    puts("HELLOOOOOOO");
-    for (int j = 0; src[j] != '\0'; j++, i++)
-    {
-        if (src[j] == '\n')
-        {
-            src[j] = ' ';
-            j++;
-            dst[i] = src[j];
-        } else
-        {
-            dst[i] = src[j];
-        }
-    }
-
-    return dst;
 }
 
 bool callHelp(int argc, char **argv){
@@ -130,6 +107,30 @@ bool checkArgs(int argc, char **argv){
     return true;
 }
 
+bool areLetters(char str[MAX_PWD_LEN]){
+    
+    int flagB, flagS;
+
+    for (int i = 0; i < lengthStr(str); i++)
+    {
+        if (str[i] >= 65 && str[i] <= 90 )
+        {
+            flagB = 1;
+        }
+        else if (str[i] >= 97 && str[i] <= 122)
+        {
+            flagS = 1;
+        }
+    }
+    
+    if (flagB == 1 && flagS == 1)
+    {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 int main(int argc, char **argv){
 
     if (callHelp(argc, argv))
@@ -139,30 +140,12 @@ int main(int argc, char **argv){
     {   
         printf("Everything is working fine yet\n");
     }
-    
-    //char p1[10] = "hello";
-    char *passwords[MAX_PWD_LEN*1000];
 
-    //printf("p1 now is %s", p1);
-    printf("passwords now is %s\n", *passwords);
-    
-    //copyStr(p1, *passwords);
+    char password[MAX_PWD_LEN];
 
-
-    char str[MAX_PWD_LEN];
-
-    while (fgets(str, MAX_PWD_LEN, stdin))
+    while(fgets(password, MAX_PWD_LEN, stdin))
     {
-        concatStr(*passwords, str);
-        printf("%s", str);
+        printf("%d\n", areLetters(password));
     }
-
-    // /* remove newline, if present */
-    // i = lengthStr(str)-1;
-    // if( str[ i ] == '\n')
-    // str[i] = '\0';
-
-    //printf("This is your string: %s\n", str);
-
     return 0;
 }
