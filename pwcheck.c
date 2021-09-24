@@ -9,7 +9,7 @@
                                         -----------------------------------
                                                                          */
 
-// #TODO: доделать функцию concatStr, разобраться с нулевым чаром (71 строка вызывает segfault)
+// #TODO: дописать обработку уникальных символов
 
 // #define  _GNU_SOURCE
 #include <stdio.h>
@@ -17,6 +17,8 @@
 #include <stdbool.h>
 
 #define MAX_PWD_LEN 100
+#define MAX_UNIQUE_SYMBOLS 94 //ASCII TABLE 33-126
+#define empty ""
 #define help "--help"
 #define stats "--stats"
 
@@ -64,27 +66,30 @@ bool helpEn(int argc, char **argv){
     return ((argc == 2) && compareStr(argv[1], help));
 }
 
-bool statsEn(char **argv){
-    return (compareStr(stats, argv[3])) ? true : false;
+bool statsEn(int argc, char **argv){
+    for (int i = 0; i < argc; ++i)
+    {
+        if (compareStr(argv[i], stats))
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
+
 bool checkInt(char *arg){
-    if (*arg >= '0' && *arg <= '9')
-    {
-        return true;
-    } else 
-    {
-        printf("Argument %s has to be a positive integer!\n", arg);
-        return false;
-    }
+    return (*arg >= '0' && *arg <= '9') ? true : false;
 }
 
 bool checkArgs(int argc, char **argv){
-    if (argc == 4 && checkInt(argv[1]) && checkInt(argv[2]) && statsEn(argv)) 
-        return true;
-    else if (argc == 3 && checkInt(argv[1]) && checkInt(argv[2])) 
-        return true;
-    
+    for (int i = 1; i < argc-1; i++)
+    {
+        if (argc == 4 && checkInt(argv[i]) && checkInt(argv[i+1]) && statsEn(argc, argv)) 
+            return true;
+        else if (argc == 3 && checkInt(argv[i]) && checkInt(argv[i+1])) 
+            return true;
+    }
     return false;
 }
 
@@ -110,13 +115,32 @@ int minLength(char str[MAX_PWD_LEN], int seen){
     return (currentMin <= seen) ? currentMin : seen;
 }
 
-// int charsCount(char str[MAX_PWD_LEN], char seen[]){
-//     for (int i = 0; i < lengthStr(str); ++i)
-//     {
+int charsCount(char str[MAX_PWD_LEN]){
+    int seen[MAX_UNIQUE_SYMBOLS] = {0};
+    int n = 0;
 
-//     }
+    for (int i = 0; i < lengthStr(str); ++i)
+    {   
+        if (str[i] != '\0' && str[i] != '\n' && str[i] != 1)
+        {
+            printf("str[i] is %d ", str[i]);
+            seen[(int)str[i]] = 1;
+            printf("seen[(int)str[i]] is %d\n", seen[(int)str[i]]);
+        }
+    }
+
     
-// }
+    for (int i = 0; i < MAX_UNIQUE_SYMBOLS; ++i)
+    {   
+        //char letter = seen[i];
+        // printf("seen[i] is '%d' ", seen[i]);
+        // printf("n is '%d'\n", seen[i]);
+        n += seen[i];
+    }
+
+    printf("n after password %s is %d\n", str, n);    
+    return n;
+}
 
 // void showStats(int chars, int min, int avg){
 
@@ -130,9 +154,12 @@ int main(int argc, char **argv){
 
     char password[MAX_PWD_LEN];
     int min = lengthStr(fgets(password, MAX_PWD_LEN, stdin));
-    float count = 1;
+    rewind(stdin);
+    float count = 0;
     float avg;
-    float sum = min;
+    float sum = 0;
+    int chars;
+
     if (helpEn(argc, argv))
     {
         showHelp(argv[0]);
@@ -144,11 +171,23 @@ int main(int argc, char **argv){
             ++count;
             min = minLength(password, min);
             sum += lengthStr(password);
+            avg = sum/count;
+            chars = charsCount(password);
+            printf("%s", password);
         }
-
-        avg = sum/count;
-        printf("Minimum length: %d\n", min);
-        printf("Average length: %.1f\n", avg);
+        printf("\n");
+        
+        if (statsEn(argc, argv))
+        {
+            
+            printf("Count: %.1f\n", count);
+            printf("Sum: %.1f\n", sum);
+            printf("Unique chars: %d\n", chars);
+            printf("Minimum length: %d\n", min);
+            printf("Average length: %.1f\n", avg);
+        }
+ 
+        return 0;
     } else if (!checkArgs(argc, argv))
     {
         printf("Something went wrong with arguments! Try %s --help for help\n", argv[0]); 
