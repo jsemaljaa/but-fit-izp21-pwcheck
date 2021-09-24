@@ -54,28 +54,20 @@ int lengthStr(char str[MAX_PWD_LEN]){
     return i;
 }
 
-char *copyStr(char *src, char *dst){
-    int i;
-    for (i = 0; src[i] != '\0'; i++)
-    {
-        dst[i] = src[i];
-    }
-    dst[i] = '\0';
-    return dst;    
-}
-
 bool callHelp(int argc, char **argv){
     return ((argc == 2) && compareStr(argv[1], help));
 }
 
 bool statsEn(char **argv){
-    if (compareStr(stats, argv[3]))
-    {
-        return true;
-    } else 
-    { 
-        return false; 
-    }
+    
+    return (compareStr(stats, argv[3])) ? true : false;
+    // if (compareStr(stats, argv[3]))
+    // {
+    //     return true;
+    // } else 
+    // { 
+    //     return false; 
+    // }
 }
 
 bool checkInt(char *arg){
@@ -123,12 +115,15 @@ bool areLetters(char str[MAX_PWD_LEN]){
         }
     }
     
-    if (flagB == 1 && flagS == 1)
-    {
-        return true;
-    } else {
-        return false;
-    }
+    return (flagB == 1 && flagS == 1) ? true : false;
+}
+
+int minLength(int seen, int curr){
+    
+    //printf("length of %s at line 123 is %d\n", str, n);
+    //printf("current seen at line 124 is %d\n", seen);
+
+    return (curr <= seen) ? curr : seen;
 }
 
 int main(int argc, char **argv){
@@ -139,13 +134,19 @@ int main(int argc, char **argv){
     } else if (checkArgs(argc, argv))
     {   
         printf("Everything is working fine yet\n");
-    }
+    }  
 
     char password[MAX_PWD_LEN];
-
+    int seen;
+    int curr = lengthStr(fgets(password, MAX_PWD_LEN, stdin));
+    
     while(fgets(password, MAX_PWD_LEN, stdin))
     {
-        printf("%d\n", areLetters(password));
+        //int min = minLength();
+        seen = lengthStr(password);
+        curr = minLength(seen, curr);
+        printf("current password is %s\n", password);
+        printf("minimum is %d\n", curr);
     }
     return 0;
 }
