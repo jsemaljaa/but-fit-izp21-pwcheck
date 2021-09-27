@@ -157,20 +157,125 @@ int seenChars(){
     return n;    
 }
 
-int main(int argc, char **argv){
+bool specialChars(char str[MAX_PWD_LEN]){
+    for (int i = 0; i < lengthStr(str); i++)
+    {
+        if ((str[i] >= 33 && str[i] <= 47) || (str[i] >= 58 && str[i] <= 64) || (str[i] >= 91 && str[i] <= 96) || (str[i] >= 123 && str[i] <= 126))
+        {
+            return true;
+        }
+    }
+    return false;
+}
 
+bool level1(char str[MAX_PWD_LEN]){
+
+    if (areLetters(str, 3))
+    {
+        return true;
+    }
+    
+    return false;
+}
+
+bool level2(char str[MAX_PWD_LEN], int param){
+    if (level1(str))
+    {
+        if (param == 1 || param == 2)
+        {
+            return true;
+        } else if (param == 3)
+        {
+            if(areIntegers(str)) return true;
+            else return false;
+        } else if (param == 4)
+        {
+            if (areIntegers(str) && specialChars(str)) return true;
+            else return false;
+        } else return false;
+    } else return false;
+}
+
+bool level3(char str[MAX_PWD_LEN], int param){
+    int same = 1;
+    if (level2(str, 4))
+    {
+        for (int i = 0; i < lengthStr(str); ++i)
+        {
+            if (str[i] == str[i+1])
+            {
+                ++same;
+                if (same == param)
+                {
+                    return false;
+                }
+            } 
+        }
+        return true;
+    } else return false;
+}
+
+void level4(char str[MAX_PWD_LEN], int param){
+    if (level3(str, param))
+    {
+        
+    } else return false;
+    
+}
+
+int argToInt(char argv[1]){
+    char *p;
+    int argumentInteger = strtol(argv, &p, 10); 
+    return argumentInteger;
+}
+
+void selectPasswords(char str[MAX_PWD_LEN], int level, int param){
+    switch (level)
+            {
+                case 1:
+                    if (level1(str))
+                    {
+                        printf("%s", str);
+                    } 
+                    break;
+                case 2:
+                    if (level2(str, param))
+                    {
+                        printf("%s", str);
+                    }
+                    break;
+                case 3:
+                    if (level3(str, param))
+                    {
+                        printf("%s", str);
+                    }
+                    
+                    break;
+                // case '4':
+                //     lvl = 4;
+                //     break;
+                default: 
+                    printf("Argument %d has to be an integer int interval [1,4]\n", level);
+                    break;
+            }
+}
+
+
+
+int main(int argc, char **argv){
     char password[MAX_PWD_LEN];
-    int min = lengthStr(fgets(password, MAX_PWD_LEN, stdin));
+    int min = lengthStr(fgets(password, MAX_PWD_LEN, stdin)), chars;
     rewind(stdin);
     float count = 0, avg, sum = 0;
-    int chars;
 
     if (helpEn(argc, argv))
     {
         showHelp(argv[0]);
         return 0;
     } else if (checkArgs(argc, argv))
-    {          
+    {   
+        int intParameter = argToInt(argv[2]);
+        int intLevel = argToInt(argv[1]);
         while(fgets(password, MAX_PWD_LEN, stdin))
         {
             ++count;
@@ -178,44 +283,7 @@ int main(int argc, char **argv){
             sum += lengthStr(password);
             avg = sum/count;
 
-            switch (*argv[1])
-            {
-                case '1':
-                    if (areLetters(password, 3))
-                    {
-                        printf("%s", password);
-                    } 
-                    break;
-                case '2':
-                    switch (*argv[2])
-                    {
-                    case '1':
-                        if (areLetters(password, 1))
-                        {
-                            printf("%s", password);
-                        }
-                        break;
-                    case '2':
-                        if (areLetters(password, 3))
-                        {
-                            /* code */
-                        }
-                        
-                    
-                    default:
-                        break;
-                    }
-                    break;
-                // case '3':
-                //     lv;
-                //     break;
-                // case '4':
-                //     lvl = 4;
-                //     break;
-                default: 
-                    printf("Argument %s has to be an integer int interval [1,4]\n", argv[1]);
-                    return 1;
-            }     
+            selectPasswords(password, intLevel, intParameter);     
         }
         
         printf("\n");
