@@ -16,11 +16,8 @@
 #include <stdbool.h>
 
 #define MAX_PWD_LEN 100
-#define empty ""
 #define help "--help"
 #define stats "--stats"
-#define one "1"
-#define two "2"
 
 enum ERRORS {
     PWD_LEN_ERROR = 1,
@@ -197,15 +194,15 @@ bool level2(char str[MAX_PWD_LEN], int param){
 }
 
 bool level3(char str[MAX_PWD_LEN], int param){
-    int same = 1;
-    if (level2(str, 4))
+    int equals = 1;
+    if (level2(str, param))
     {
         for (int i = 0; i < lengthStr(str); ++i)
         {
             if (str[i] == str[i+1])
             {
-                ++same;
-                if (same == param)
+                ++equals;
+                if (equals == param)
                 {
                     return false;
                 }
@@ -215,12 +212,30 @@ bool level3(char str[MAX_PWD_LEN], int param){
     } else return false;
 }
 
-void level4(char str[MAX_PWD_LEN], int param){
+bool level4(char* str, int param){    
     if (level3(str, param))
     {
-        
+        int counter = 0;
+        while(*str != '\0'){
+
+            char* curr = str;
+            char* equals = str+1;
+
+            while(*equals != '\0'){
+                if(*curr == *equals){
+                    counter++;
+                    curr++;
+                } else{
+                    counter = 0;
+                }
+
+                if(counter >= param)
+                return false;
+                equals++;
+            }
+            str++;
+        } return true;
     } else return false;
-    
 }
 
 int argToInt(char argv[1]){
@@ -231,53 +246,51 @@ int argToInt(char argv[1]){
 
 void selectPasswords(char str[MAX_PWD_LEN], int level, int param){
     switch (level)
+    {
+        case 1:
+            if (level1(str))
             {
-                case 1:
-                    if (level1(str))
-                    {
-                        printf("%s", str);
-                    } 
-                    break;
-                case 2:
-                    if (level2(str, param))
-                    {
-                        printf("%s", str);
-                    }
-                    break;
-                case 3:
-                    if (level3(str, param))
-                    {
-                        printf("%s", str);
-                    }
-                    
-                    break;
-                // case '4':
-                //     lvl = 4;
-                //     break;
-                default: 
-                    printf("Argument %d has to be an integer int interval [1,4]\n", level);
-                    break;
+                printf("%s", str);
+            } 
+            break;
+        case 2:
+            if (level2(str, param))
+            {
+                printf("%s", str);
             }
+            break;
+        case 3:
+            if (level3(str, param))
+            {
+                printf("%s", str);
+            }
+            break;
+        case 4:
+            if (level4(str, param))
+            {
+                printf("%s", str);
+            }
+            
+        default: 
+            //printf("Argument %d has to be an integer int interval [1,4]\n", level);
+            break;
+    }
 }
-
-
 
 int main(int argc, char **argv){
     char password[MAX_PWD_LEN];
-    int min = lengthStr(fgets(password, MAX_PWD_LEN, stdin)), chars;
-    rewind(stdin);
+    int chars;
     float count = 0, avg, sum = 0;
 
-    if (helpEn(argc, argv))
-    {
+    if (helpEn(argc, argv)){
         showHelp(argv[0]);
         return 0;
-    } else if (checkArgs(argc, argv))
-    {   
+    } else if (checkArgs(argc, argv)){   
         int intParameter = argToInt(argv[2]);
         int intLevel = argToInt(argv[1]);
-        while(fgets(password, MAX_PWD_LEN, stdin))
-        {
+        int min = lengthStr(fgets(password, MAX_PWD_LEN, stdin));
+        rewind(stdin);
+        while(fgets(password, MAX_PWD_LEN, stdin)){
             ++count;
             min = minLength(password, min);
             sum += lengthStr(password);
@@ -287,18 +300,14 @@ int main(int argc, char **argv){
         }
         
         printf("\n");
-        if (statsEn(argc, argv))
-        {
+        if (statsEn(argc, argv)){
             chars = seenChars();
             printf("Statistics:\nUnique chars: %d\nMinimum length: %d\nAverage length: %.1f\n", chars, min, avg);
         }
- 
         return 0;
-    } else if (!checkArgs(argc, argv))
-    {
+    } else if (!checkArgs(argc, argv)){
         printf("Something went wrong with arguments! Try %s --help for help\n", argv[0]); 
         return ARG_ERROR;
     }
-    
     return 0;
 }
