@@ -17,16 +17,16 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#define MAX_PWD_LEN 100
+#define MAX_PWD_LEN 100 // maximum length of a password is 100, a buffer for one password contains 2 extra positions for '\n' and '\0'
 #define MAX_ARG_COUNT 4 // including  argv[0] == ./filename
 #define help "--help"
 #define stats "--stats"
 
 enum ERRORS {
-    PWD_LEN_ERROR = 1,
-    ARG_ERROR = 1,
-    WRONG_LEVEL_VALUE = 1,
-    WRONG_PARAM_VALUE = 1
+    PWD_LEN_ERROR = 0,
+    ARG_ERROR = 0,
+    WRONG_LEVEL_VALUE = 0,
+    WRONG_PARAM_VALUE = 0
 };
 
 void showHelp(const char *argv){
@@ -36,7 +36,16 @@ void showHelp(const char *argv){
     printf("--stats (optional) determines whether summary statistics of the analyzed passwords should be displayed at the end of the program\n--------\n");
 }
 
-int lengthStr(const char *str){
+int lengthStr(const char *str){ 
+    /* 
+        A function for calculating the length of a string.
+
+        Starting from the first character of the line (using the address of the beginning), 
+        the number is counted character by character, increasing the address by 1 each iteration 
+        until the character at the current address (*str) is equal to the end-of-line ('\0') 
+        or a line feed ('\n') or a carriage return ('\r').
+    */
+    
     int n = 0;
     while (*str != '\0' && *str != '\n' && *str != '\r'){
         ++n;
@@ -46,6 +55,15 @@ int lengthStr(const char *str){
 }
 
 bool compareStr(char *src, char *dst){
+    /* 
+        A function for comparing strings.
+
+        Pointers to the beginning of the first line (*src) and the beginning of the second line (*dst) are used as input. 
+        Compare character by character, incrementing the pointer values for each row by 1 each iteration.
+        Returns () if the characters at the current addresses are not equal to each other, 
+        or if the end-of-line character ('\0') is found at one of the addresses
+    */
+
     while (*src != '\0' || *dst != '\0'){
         if ((*src != *dst) || ((*src == '\0') && (*dst != '\0')) || ((*src != '\0') && (*dst == '\0'))){
             return false;
@@ -58,6 +76,13 @@ bool compareStr(char *src, char *dst){
 }
 
 bool statsEn(int argc, char **argv){
+    /* 
+        A function for checking the existence of an argument.
+    
+        Receives an array with existing arguments and an integer argument with their amount as input.
+        Compares each argument with a string (), if such an argument exists, then returns true.
+    */
+
     for (int i = 0; i < argc; ++i){
         if (compareStr(argv[i], stats)){
             return true;
@@ -147,23 +172,23 @@ bool checkArgs(int argc, char **argv){
             switch (argv[opid][1]){
             case 'l':
                 if (argv[opid+1] == 0 || !isArgDigit(argv[opid+1])){
-                    return false;
+                    return WRONG_LEVEL_VALUE;
                 } else {
                     lvlInt = argToInt(argv[opid+1]);
                     if (lvlInt <= 0 || lvlInt > 4){
-                        return false;
+                        return WRONG_LEVEL_VALUE;
                     }
                     ++opid;
                     break;
                 }
             case 'p':
                 if(argv[opid+1] == 0 || !isArgDigit(argv[opid+1])){
-                    return false;
+                    return WRONG_PARAM_VALUE;
                 } else {
                     paramInt = argToInt(argv[opid+1]);
                     if (paramInt < 0)
                     {
-                        return false;
+                        return WRONG_PARAM_VALUE;
                     }
                     ++opid;
                     break;
@@ -191,10 +216,11 @@ bool checkArgs(int argc, char **argv){
             }
             return true;
         }
-    } else {
+    } else if (argc <= MAX_ARG_COUNT){
         lvlInt = argToInt(argv[1]);
         paramInt = argToInt(argv[2]);
     }
+    else return false;
 
     if ((lvlInt > 4 || lvlInt <= 0) || (paramInt < 0)) return false;
     else return true;   
@@ -302,18 +328,11 @@ void selectPasswords(char str[MAX_PWD_LEN], int level, int param){
 }
 
 int pwdProcessing(int argc, char *argv[]){
-    char password[MAX_PWD_LEN];
+    char password[MAX_PWD_LEN+2];
     int chars, intLevel = 0, intParameter = 0;
     float count = 0, avg, sum = 0;
 
-    if (argc == 1)
-    {
-        intLevel = 1;
-        intParameter = 1;
-    }
-
     if (!isDigit(argv[1])){
-        // int opid;
         for (int opid = 1; opid < argc && argv[opid][0] == '-'; ++opid){
             switch (argv[opid][1]){
             case 'l':
@@ -325,7 +344,7 @@ int pwdProcessing(int argc, char *argv[]){
                 ++opid;
                 break;
             case '-':
-                if (compareStr(argv[opid], stats)) //++opid;
+                if (compareStr(argv[opid], stats)) 
                 break;
             default:
                 break;
@@ -349,8 +368,9 @@ int pwdProcessing(int argc, char *argv[]){
     
     int min = lengthStr(fgets(password, MAX_PWD_LEN, stdin));
     rewind(stdin);
-    while(fgets(password, MAX_PWD_LEN+1, stdin)){
-        if (lengthStr(password) > MAX_PWD_LEN)
+    while(fgets(password, MAX_PWD_LEN, stdin)){
+        size_t l = lengthStr(password);
+        if (l == 100 && (password[l] != '\n' || password[l] != '\0'))
         {
             fprintf(stderr, "Error! Max length of password has to be 100\n");
         }
@@ -363,15 +383,15 @@ int pwdProcessing(int argc, char *argv[]){
     }
     if (statsEn(argc, argv)){
         chars = seenChars();
-        printf("Statistika:\nRuznych znaku: %d\nMinimalni delka: %d\nPrumerna delka: %.1f\n", chars, min, avg);
-        // printf("Statistics:\nUnique chars: %d\nMinimum length: %d\nAverage length: %.1f\n", chars, min, avg);
+        // printf("Statistika:\nRuznych znaku: %d\nMinimalni delka: %d\nPrumerna delka: %.1f\n", chars, min, avg);
+        printf("Statistics:\nUnique chars: %d\nMinimum length: %d\nAverage length: %.1f\n", chars, min, avg);
     }
 
     return 0;
 }
 
 int main(int argc, char *argv[]){
-    if ((argc == 2) && compareStr(argv[1], help)){
+    if (((argc == 2) && compareStr(argv[1], help)) || argc == 1){
         showHelp(argv[0]);
         return 0;
     } else if (!checkArgs(argc, argv)) {
