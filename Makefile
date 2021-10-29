@@ -1,3 +1,3 @@
 CC=gcc
-CFLAGS = -Wall -Wextra -Werror -std=c99
+CFLAGS = -std=c99 -Wall -Wextra -Werror
 pwcheck:

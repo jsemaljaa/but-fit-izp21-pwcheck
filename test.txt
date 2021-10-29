@@ -1,9 +1,9 @@
-[ OK ] Test ze zadani #1
-[ OK ] Test ze zadani #2
-[ OK ] Test ze zadani #3
-[ OK ] Test ze zadani #4
-[FAIL] Test ze zadani #5
-Vystup programu s neshoduje s predpokladanym vystupem!
+[1;32;40m[ OK ][0;37;40m Test ze zadani #1
+[1;32;40m[ OK ][0;37;40m Test ze zadani #2
+[1;32;40m[ OK ][0;37;40m Test ze zadani #3
+[1;32;40m[ OK ][0;37;40m Test ze zadani #4
+[1;31;40m[FAIL][0;37;40m Test ze zadani #5
+Vystup programu se neshoduje s predpokladanym vystupem!
 
 Argumenty:  2 4 --stats
 Predpokladany vystup:
@@ -15,288 +15,86 @@ Prumerna delka: 14.4
 
 STDOUT:
 IZP2021:fit@vut.cz
-Statistika:
-Ruznych znaku: 0
-Minimalni delka: 8
-Prumerna delka: 15.5
+Statistics:
+Unique chars: 0
+Minimum length: 8
+Average length: 15.5
 
 STDERR:
 
-[FAIL] Test na LEVEL 1 #1
-Vystup programu s neshoduje s predpokladanym vystupem!
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 1 #1
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 1 #2
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 1 #3
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 1 #4
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 2 #1
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 2 #2
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 2 #3
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 2 #4
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 2 #5
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 2 #6
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 2 #7
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 2 #8
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 3 #1
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 3 #2
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 3 #3
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 3 #4
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 3 #5
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 3 #6
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 3 #7
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 4 #1
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 4 #2
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 4 #3
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 4 #4
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 4 #5
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 4 #6
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 4 #7
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 4 #8
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 4 #9
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 4 #10
+[1;32;40m[ OK ][0;37;40m Test na LEVEL 4 #11
+[1;31;40m[FAIL][0;37;40m Test na LEVEL 4 #12
+Vystup programu se neshoduje s predpokladanym vystupem!
 
-Argumenty:  1 1
+Argumenty:  4 5
 Predpokladany vystup:
-Aa
 
 STDOUT:
+hahah%aZ0hahah
 
 STDERR:
 
-[FAIL] Test na LEVEL 1 #2
-Vystup programu s neshoduje s predpokladanym vystupem!
+[1;32;40m[ OK ][0;37;40m Nedostatecny pocet argumentu
+[1;32;40m[ OK ][0;37;40m Prilis mnoho argumentu
+[1;32;40m[ OK ][0;37;40m Ciselne argumenty maji pismena na konci
+[1;32;40m[ OK ][0;37;40m Cislene argumenty maji pismena na zacatku
+[1;32;40m[ OK ][0;37;40m Cislene argumenty maji pismena uprostred
+[1;32;40m[ OK ][0;37;40m Prvni argument mimo rozsah #1: 0
+[1;32;40m[ OK ][0;37;40m Prvni argument mimo rozsah #2: 5
+[1;32;40m[ OK ][0;37;40m Prvni argument mimo rozsah #3: 2000000000
+[1;32;40m[ OK ][0;37;40m Prvni argument mimo rozsah #4: vetsi nez LONG_MAX
+[1;32;40m[ OK ][0;37;40m Prvni argument mimo rozsah #5: -2000000000
+[1;32;40m[ OK ][0;37;40m Prvni argument mimo rozsah #6: mensi nez LONG_MIN
+[1;32;40m[ OK ][0;37;40m Druhy argument mimo rozsah #1: 0
+[1;32;40m[ OK ][0;37;40m Druhy argument mimo rozsah #2: -2000000000
+[1;32;40m[ OK ][0;37;40m Druhy argument mimo rozsah #3: mensi nez LONG_MIN
+[1;31;40m[FAIL][0;37;40m Druhy argument velky: vetsi nez LONG_MAX
+Program vratil chybovy navratovy kod (1) prestoze nemel!
+Vystup programu se neshoduje s predpokladanym vystupem!
 
-Argumenty:  1 1
+Argumenty:  4 10223372036854775807
 Predpokladany vystup:
-Zz
-
-STDOUT:
-
-STDERR:
-
-[ OK ] Test na LEVEL 1 #3
-[ OK ] Test na LEVEL 1 #4
-[ OK ] Test na LEVEL 2 #1
-[FAIL] Test na LEVEL 2 #2
-Vystup programu s neshoduje s predpokladanym vystupem!
-
-Argumenty:  2 2
-Predpokladany vystup:
-Aa
-
-STDOUT:
-
-STDERR:
-
-[FAIL] Test na LEVEL 2 #3
-Vystup programu s neshoduje s predpokladanym vystupem!
-
-Argumenty:  2 2
-Predpokladany vystup:
-Zz
-
-STDOUT:
-
-STDERR:
-
-[FAIL] Test na LEVEL 2 #4
-Vystup programu s neshoduje s predpokladanym vystupem!
-
-Argumenty:  2 4
-Predpokladany vystup:
-%aZ0
-
-STDOUT:
-
-STDERR:
-
-[ OK ] Test na LEVEL 2 #5
-[ OK ] Test na LEVEL 2 #6
-[FAIL] Test na LEVEL 2 #7
-Vystup programu s neshoduje s predpokladanym vystupem!
-
-Argumenty:  2 3
-Predpokladany vystup:
-aZ0
-
-STDOUT:
-
-STDERR:
-
-[ OK ] Test na LEVEL 3 #1
-[FAIL] Test na LEVEL 3 #2
-Vystup programu s neshoduje s predpokladanym vystupem!
-
-Argumenty:  3 2
-Predpokladany vystup:
-Aa
-
-STDOUT:
-
-STDERR:
-
-[ OK ] Test na LEVEL 3 #3
-[FAIL] Test na LEVEL 3 #4
-Vystup programu s neshoduje s predpokladanym vystupem!
-
-Argumenty:  3 4
-Predpokladany vystup:
-Az0!!!
-
-STDOUT:
-
-STDERR:
-
-[ OK ] Test na LEVEL 3 #5
-[ OK ] Test na LEVEL 4 #1
-[FAIL] Test na LEVEL 4 #2
-Vystup programu s neshoduje s predpokladanym vystupem!
-
-Argumenty:  4 2
-Predpokladany vystup:
-Aaha
-
-STDOUT:
-
-STDERR:
-
-[ OK ] Test na LEVEL 4 #3
-[FAIL] Test na LEVEL 4 #4
-Vystup programu s neshoduje s predpokladanym vystupem!
-
-Argumenty:  4 3
-Predpokladany vystup:
-0Abhaha
-
-STDOUT:
-
-STDERR:
-
-[ OK ] Test na LEVEL 4 #5
-[ OK ] Test na LEVEL 4 #6
-[FAIL] Test na LEVEL 4 #7
-Vystup programu s neshoduje s predpokladanym vystupem!
-
-Argumenty:  4 4
-Predpokladany vystup:
-%aZ0x%aZ
-
-STDOUT:
-
-STDERR:
-
-[ OK ] Test na LEVEL 4 #8
-[ OK ] Test na LEVEL 4 #9
-[FAIL] Nedostatecny pocet argumentu
-Program nevratil na STDERR zadnou chybovou zpravu!
-
-Argumenty:  1
-Predpokladany vystup:
-
-STDOUT:
-
-STDERR:
-
-[FAIL] Prilis mnoho argumentu
-Program nevratil na STDERR zadnou chybovou zpravu!
-
-Argumenty:  1 1 --stats 1
-Predpokladany vystup:
-
-STDOUT:
-Password
-Heslo123
-Mojevelmidlouhehesloscislem0
-IZP2021:fit@vut.cz
-Statistika:
-Ruznych znaku: 0
-Minimalni delka: 8
-Prumerna delka: 15.5
-
-STDERR:
-
-[FAIL] Ciselne argumenty maji pismena na konci
-Program nevratil na STDERR zadnou chybovou zpravu!
-
-Argumenty:  1a 1a
-Predpokladany vystup:
-
-STDOUT:
-Password
-Heslo123
-Mojevelmidlouhehesloscislem0
 IZP2021:fit@vut.cz
 
-STDERR:
-
-[FAIL] Cislene argumenty maji pismena na zacatku
-Program nevratil na STDERR zadnou chybovou zpravu!
-
-Argumenty:  a1 a1
-Predpokladany vystup:
-
 STDOUT:
 
 STDERR:
+Something went wrong with arguments! Try ./pwcheck --help for help
 
-[FAIL] Cislene argumenty maji pismena uprostred
-Program nevratil na STDERR zadnou chybovou zpravu!
-
-Argumenty:  0a1 0a1
-Predpokladany vystup:
-
-STDOUT:
-
-STDERR:
-
-[FAIL] Prvni argument mimo rozsah #1: 0
-Program nevratil na STDERR zadnou chybovou zpravu!
-
-Argumenty:  0 1
-Predpokladany vystup:
-
-STDOUT:
-
-STDERR:
-
-[FAIL] Prvni argument mimo rozsah #2: 5
-Program nevratil na STDERR zadnou chybovou zpravu!
-
-Argumenty:  5 1
-Predpokladany vystup:
-
-STDOUT:
-
-STDERR:
-
-[FAIL] Druhy argument mimo rozsah #1: 0
-Program nevratil na STDERR zadnou chybovou zpravu!
-
-Argumenty:  1 0
-Predpokladany vystup:
-
-STDOUT:
-Password
-Heslo123
-Mojevelmidlouhehesloscislem0
-IZP2021:fit@vut.cz
-
-STDERR:
-
-[FAIL] Treti argument (--stats) neplatny #1: --haha
-Program nevratil na STDERR zadnou chybovou zpravu!
-
-Argumenty:  1 1 --haha
-Predpokladany vystup:
-
-STDOUT:
-Password
-Heslo123
-Mojevelmidlouhehesloscislem0
-IZP2021:fit@vut.cz
-
-STDERR:
-
-[FAIL] Treti argument (--stats) neplatny #2: --statshaha
-Program nevratil na STDERR zadnou chybovou zpravu!
-
-Argumenty:  1 1 --statshaha
-Predpokladany vystup:
-
-STDOUT:
-Password
-Heslo123
-Mojevelmidlouhehesloscislem0
-IZP2021:fit@vut.cz
-
-STDERR:
-
-[FAIL] Treti argument (--stats) neplatny #3: stats
-Program nevratil na STDERR zadnou chybovou zpravu!
-
-Argumenty:  1 1 --statshaha
-Predpokladany vystup:
-
-STDOUT:
-Password
-Heslo123
-Mojevelmidlouhehesloscislem0
-IZP2021:fit@vut.cz
-
-STDERR:
-
-[FAIL] Maximalni delka hesla
-Vystup programu s neshoduje s predpokladanym vystupem!
+[1;32;40m[ OK ][0;37;40m Treti argument (--stats) neplatny #1: --haha
+[1;32;40m[ OK ][0;37;40m Treti argument (--stats) neplatny #2: --statshaha
+[1;32;40m[ OK ][0;37;40m Treti argument (--stats) neplatny #3: stats
+[1;31;40m[FAIL][0;37;40m Maximalni delka hesla
+Vystup programu se neshoduje s predpokladanym vystupem!
 
 Argumenty:  1 1 --stats
 Predpokladany vystup:
@@ -306,36 +104,35 @@ Minimalni delka: 100
 Prumerna delka: 100.0
 
 STDOUT:
+Statistics:
+Unique chars: 0
+Minimum length: 0
+Average length: 0.0
+
+STDERR:
+
+[1;32;40m[ OK ][0;37;40m Heslo prilis dlouhe #1: 101
+[1;32;40m[ OK ][0;37;40m Heslo prilis dlouhe #2: 10000
+[1;31;40m[FAIL][0;37;40m Zadna hesla
+Vystup programu se neshoduje s predpokladanym vystupem!
+
+Argumenty:  1 1 --stats
+Predpokladany vystup:
 Statistika:
 Ruznych znaku: 0
-Minimalni delka: 1
-Prumerna delka: 1.0
-
-STDERR:
-
-[FAIL] Heslo prilis dlouhe #1: 101
-Program nevratil na STDERR zadnou chybovou zpravu!
-
-Argumenty:  1 1
-Predpokladany vystup:
+Minimalni delka: 0
+Prumerna delka: 0.0
 
 STDOUT:
+Statistics:
+Unique chars: 0
+Minimum length: 0
+Average length: 0.0
 
 STDERR:
 
-[FAIL] Heslo prilis dlouhe #2: 10000
-Program nevratil na STDERR zadnou chybovou zpravu!
-
-Argumenty:  1 1
-Predpokladany vystup:
-
-STDOUT:
-
-STDERR:
-
-[ OK ] Zadna hesla
-[FAIL] Velky pocet hesel: 10000
-Vystup programu s neshoduje s predpokladanym vystupem!
+[1;31;40m[FAIL][0;37;40m Velky pocet hesel: 10000
+Vystup programu se neshoduje s predpokladanym vystupem!
 
 Argumenty:  1 1 --stats
 Predpokladany vystup:
@@ -345,73 +142,13 @@ Minimalni delka: 1
 Prumerna delka: 1.0
 
 STDOUT:
-Statistika:
-Ruznych znaku: 0
-Minimalni delka: 1
-Prumerna delka: 1.0
+Statistics:
+Unique chars: 0
+Minimum length: 1
+Average length: 1.0
 
 STDERR:
 
-[FAIL] BONUS | Bez argumentu
-Program vratil chybovy navratovy kod (-11) prestoze nemel!
-Vystup programu s neshoduje s predpokladanym vystupem!
-
-Argumenty:  
-Predpokladany vystup:
-Password
-Heslo123
-Mojevelmidlouhehesloscislem0
-IZP2021:fit@vut.cz
-
-STDOUT:
-
-STDERR:
-
-[FAIL] BONUS | Validni argumenty #1
-Vystup programu s neshoduje s predpokladanym vystupem!
-
-Argumenty:  -l 2 -p 4 --stats
-Predpokladany vystup:
-IZP2021:fit@vut.cz
-Statistika:
-Ruznych znaku: 36
-Minimalni delka: 8
-Prumerna delka: 14.4
-
-STDOUT:
-IZP2021:fit@vut.cz
-Statistika:
-Ruznych znaku: 0
-Minimalni delka: 8
-Prumerna delka: 15.5
-
-STDERR:
-
-[FAIL] BONUS | Validni argumenty #2
-Vystup programu s neshoduje s predpokladanym vystupem!
-
-Argumenty:  --stats -p 4 -l 2
-Predpokladany vystup:
-IZP2021:fit@vut.cz
-Statistika:
-Ruznych znaku: 36
-Minimalni delka: 8
-Prumerna delka: 14.4
-
-STDOUT:
-IZP2021:fit@vut.cz
-Statistika:
-Ruznych znaku: 0
-Minimalni delka: 8
-Prumerna delka: 15.5
-
-STDERR:
-
-[ OK ] BONUS | Neexistujici prepinac
-[ OK ] BONUS | Neexistujici hodnota po prepinaci
-[ OK ] BONUS | Prepinac za prepinacem
 -- STATISTIKA --
 Zakladni reseni:
-Uspesnost: 19/46 (41.30434782608695%)
-Bonusove reseni
-Uspesnost: 3/6 (50.0%)
+Uspesnost: 53/59 (89.83%)

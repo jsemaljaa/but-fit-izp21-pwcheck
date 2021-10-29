@@ -2,3 +2,9 @@
 .vscode/launch.json
 .vscode/settings.json
 help/
+Aa.txt
+out.txt
+stdin
+stdin.c 
+test.py
+test.txt
