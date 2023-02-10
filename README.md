@@ -1,7 +1,7 @@
 # pwcheck
 
 ## School project (Introduction to Programming Systems, C)
-Evaluation: TBA
+Evaluation: 5.6/10.00 (-2.00 for using rewind() :'D )
 
 # EN
 
